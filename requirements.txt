@@ -1,0 +1,8 @@
+Flask==2.0.1
+requests==2.26.0
+pgeocode==0.3.0
+us==2.0.2
+matplotlib==3.4.3
+seaborn==0.11.2
+tk==0.1.0
+
