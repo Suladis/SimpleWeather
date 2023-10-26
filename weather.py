@@ -3,12 +3,9 @@ import pgeocode
 import us
 import matplotlib.pyplot as plt
 from matplotlib.widgets import RadioButtons # to be used for future functions
-import seaborn as sns
-sns.set_style("darkgrid")
 import requests
 import tkinter as tk
 from tkinter import simpledialog
-import streamlit as st
 
 def get_local_weather_forecast(latitude, longitude):
     print(latitude, longitude)
@@ -111,7 +108,7 @@ def ZipToGeo(zip):
     latitude = float(query["latitude"])
     longitude = float(query["longitude"])
     
-    state = stateAbbr(query["state_name"])
+    state = query.get(["state_name"])
    
     get_alerts_for_state(state)
     

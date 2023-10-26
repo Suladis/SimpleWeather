@@ -1,7 +1,8 @@
 # Weather Alert App
 
 This is a simple Python application that retrieves weather forecasts and active alerts based on user-provided ZIP codes. It uses the National Weather Service API for fetching weather data.
-Features:
+
+# Features:
 
     Display the number of active weather alerts.
     Retrieve and display active alerts for a specific state.
@@ -26,3 +27,7 @@ Features:
     Follow the prompts to enter a ZIP code and view weather information.
 
 
+# Future Implementation
+    
+    Flask web application to ask for user input
+    Display of Weather 
