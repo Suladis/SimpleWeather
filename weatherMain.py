@@ -3,7 +3,7 @@
 import requests
 import pgeocode
 
-def get_local_weather_forecast(latitude, longitude):
+def getForecast(latitude, longitude):
      # Get grid forecast endpoint for the specified location
     endpoint_url = f'https://api.weather.gov/points/{latitude},{longitude}'
     response = requests.get(endpoint_url)
@@ -39,7 +39,7 @@ def num_alerts():
 
 
 
-def get_alerts_for_state(state):
+def getAlerts(state):
     endpoint_url = f'https://api.weather.gov/alerts/active?area={state}'
     response = requests.get(endpoint_url)
     
@@ -55,7 +55,7 @@ def get_alerts_for_state(state):
     
     return alerts_data
 
-def zip_to_geo(zip):
+def zipToGeo(zip):
     nomi = pgeocode.Nominatim('us')
     query = nomi.query_postal_code(zip)
 

@@ -2,7 +2,7 @@
 print("Executing app.py")
 from flask import Flask, render_template, request
 
-from weatherMain import num_alerts, get_alerts_for_state, zip_to_geo, get_local_weather_forecast
+from weatherMain import num_alerts, getAlerts, zipToGeo, getForecast
 
 app = Flask(__name__)
 
@@ -19,15 +19,15 @@ def get_weather():
     print("Zip Code:", zip_code)
     
     # Call functions from weather.py
-    latitude, longitude, state = zip_to_geo(zip_code)
+    latitude, longitude, state = zipToGeo(zip_code)
     print("Latitude:", latitude)
     print("Longitude:", longitude)
     print("State:", state)
 
-    alerts = get_alerts_for_state(state)
+    alerts = getAlerts(state)
     print("Alerts:", alerts)
 
-    forecast = get_local_weather_forecast(latitude, longitude)
+    forecast = getForecast(latitude, longitude)
     print("Forecast:", forecast)
 
     # Ensure forecast is a dictionary
