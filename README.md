@@ -2,6 +2,17 @@
 
 This is a simple Python application that retrieves weather forecasts and active alerts based on user-provided ZIP codes. It uses the National Weather Service API for fetching weather data.
 
+# NWS API 
+https://www.weather.gov/documentation/services-web-api
+
+# Flask
+
+https://flask.palletsprojects.com/en/3.0.x/
+
+# PGEOCODE
+
+https://pgeocode.readthedocs.io/en/latest/
+
 # Features:
 
     Display the number of active weather alerts.
