@@ -35,7 +35,7 @@ def get_weather():
         forecast = {}  # Set an empty dictionary if forecast is not a dictionary
 
     # Render the template with the data
-    return render_template('result.html', num_alerts=num_alerts(), alerts=alerts, forecast=forecast)
+    return render_template('result.html', num_alerts=num_alerts(), alerts=alerts, forecast=forecast , zip_code=zip_code)
 
 
 if __name__ == "__main__":

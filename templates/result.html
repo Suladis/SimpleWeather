@@ -22,7 +22,8 @@
                 {% endfor %}
             </ul>
 
-            <h3>Local Weather Forecast:</h3>
+            <h3>Weather Forecast:</h3>
+            <h2> ZipCode:{{ zip_code }} </h2>
             <ul>
                 {% for period, data in forecast.items() %}
                     <li>{{ period }}: {{ data.forecast }} - {{ data.temperature }}°F</li>
