@@ -11,6 +11,14 @@
 </head>
 <body>
     <div class="container mt-5">
+        <form action="/get_weather" method="post" class="mt-4">
+            <div class="form-group">
+                <label for="zipCode">Enter Zip Code:</label>
+                <input type="text" class="form-control" id="zipCode" name="zipCode" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Get Weather</button>
+        </form>
+        
         <h1 class="mb-4">Results</h1>
 
 
