@@ -1,5 +1,5 @@
 # app.py
-print("Executing app.py")
+# print("Executing app.py")
 from flask import Flask, render_template, request
 
 from weatherMain import num_alerts, getAlerts, zipToGeo, getForecast
@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    print("Accessed index route")
+    # print("Accessed index route")
     return render_template('index.html')
 
 
@@ -18,7 +18,7 @@ def get_weather():
     zip_code = request.form['zipCode']
     print("Zip Code:", zip_code)
     
-    # Call functions from weather.py
+    # Call functions from weatherMain.py
     latitude, longitude, state = zipToGeo(zip_code)
     print("Latitude:", latitude)
     print("Longitude:", longitude)
