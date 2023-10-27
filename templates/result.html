@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Alert App Result</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container mt-5">
@@ -16,13 +15,41 @@
                 <label for="zipCode">Enter Zip Code:</label>
                 <input type="text" class="form-control" id="zipCode" name="zipCode" required>
             </div>
-            <button type="submit" class="btn btn-primary">Get Weather</button>
-        </form>
+            <button type="submit" class="getWeather">Get Weather</button>
+        </form> 
         
-        <h1 class="mb-4">Results</h1>
+        <h1 class="hehe">Results</h1>
 
 
-        <div class="mt-4">
+        <div class="forecast">
+           
+            <h3>Weather Forecast:</h3>
+            <h2> ZipCode:{{ zip_code }} </h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th> 
+                        {% for period, data in forecast.items() %}
+                            <th>{{ period }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Forecast</td>
+                        {% for period, data in forecast.items() %}
+                            <td>{{ data.forecast }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td>Temperature (°F)</td>
+                        {% for period, data in forecast.items() %}
+                            <td>{{ data.temperature }}</td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+
             <h3>Active Alerts:</h3>
             <ul>
                 {% for alert in alerts %}
@@ -30,18 +57,9 @@
                 {% endfor %}
             </ul>
 
-            <h3>Weather Forecast:</h3>
-            <h2> ZipCode:{{ zip_code }} </h2>
-            <ul>
-                {% for period, data in forecast.items() %}
-                    <li>{{ period }}: {{ data.forecast }} - {{ data.temperature }}°F</li>
-                {% endfor %}
-            </ul>
+            
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
