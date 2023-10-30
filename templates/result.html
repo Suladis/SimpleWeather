@@ -1,34 +1,19 @@
 <!-- result.html -->
+{% extends 'index.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Alert App Result</title>
-</head>
-<body>
-    <div class="container mt-5">
-        <form action="/get_weather" method="post" class="mt-4">
-            <div class="form-group">
-                <label for="zipCode">Enter Zip Code:</label>
-                <input type="text" class="form-control" id="zipCode" name="zipCode" required>
-            </div>
-            <button type="submit" class="getWeather">Get Weather</button>
-        </form> 
-        
-        <h1 class="hehe">Results</h1>
+{% block title %}
+    <title>Weather Alert App Results</title>
+{% endblock %}
 
-
+{% block results %}
+    <div class="resContainer">
+        <h1 class="hehe"></h1>
         <div class="forecast">
-           
-            <h3>Weather Forecast:</h3>
-            <h2> ZipCode:{{ zip_code }} </h2>
+            <h4> 7-Day Forecast for ZipCode:{{ zip_code }} </h4>
             <table class="localForecast">
                 <thead>
                     <tr>
-                        <th></th> 
+                        
                         {% for period, data in forecast.items() %}
                             <th>{{ period }}</th>
                         {% endfor %}
@@ -36,30 +21,28 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Forecast</td>
+                        
                         {% for period, data in forecast.items() %}
                             <td>{{ data.forecast }}</td>
                         {% endfor %}
                     </tr>
                     <tr>
-                        <td>Temperature (°F)</td>
+                        
                         {% for period, data in forecast.items() %}
-                            <td>{{ data.temperature }}</td>
+                            <td>{{ data.temperature }} °F</td>
                         {% endfor %}
                     </tr>
                 </tbody>
             </table>
-
-            <h3>Active Alerts:</h3>
+        </div>
+    </div>
+        <div class="resContainer">
+            <h4>Active Alerts:</h4>
             <ul>
                 {% for alert in alerts %}
                     <li>{{ alert.event }} - {{ alert.headline }} - {{ alert.severity }}</li>
                 {% endfor %}
             </ul>
-
-            
         </div>
-    </div>
-
-</body>
-</html>
+   
+{% endblock %}

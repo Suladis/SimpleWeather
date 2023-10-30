@@ -4,28 +4,33 @@ import requests
 import pgeocode
 
 def getForecast(latitude, longitude):
-     # Get grid forecast endpoint for the specified location
+    # Get grid forecast endpoint for the specified location
     endpoint_url = f'https://api.weather.gov/points/{latitude},{longitude}'
     response = requests.get(endpoint_url)
-    
+
     temp_data = {}
-    
+
     if response.status_code == 200:
         # Parse the response JSON
         data = response.json()
-        
+
         # Get the forecast URL for 12h periods
         forecast_url = data['properties']['forecast']
-        
+
         # Fetch the forecast data
         forecast_response = requests.get(forecast_url)
-        
+
         if forecast_response.status_code == 200:
             forecast_data = forecast_response.json()
-        for period in forecast_data['properties']['periods']:
-            temp_data[period['name']] = {'forecast': period['shortForecast'], 'temperature': period['temperature']}
-    
+            
+            for period in forecast_data.get('properties', {}).get('periods', []):
+                temp_data[period.get('name', '')] = {
+                    'forecast': period.get('shortForecast', ''),
+                    'temperature': period.get('temperature', '')
+                }
+
     return temp_data
+
 
 def num_alerts():
     endpoint_url = 'https://api.weather.gov/alerts/active/count'

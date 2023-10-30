@@ -1,0 +1,112 @@
+/* style.css */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(228, 228, 228);
+}
+
+.enterZip {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    margin:auto;
+}
+
+.topBanner {
+    background-color: #3498db;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    border-radius: 0px 0px 20px 20px;
+}
+
+.loc-input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 20px;
+    width: 100%;
+    gap: 10px;
+}
+
+.getWeather {
+    border-radius: 10px;
+    border: solid gainsboro;
+    background-color: #3498db;
+    height: 34px;
+    text-decoration: solid;
+   text-align: center;
+    width: 100px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    
+}
+
+
+.form-control {
+padding: 8px;
+  display: block;
+  border: none;
+    border-bottom-width: medium;
+    border-bottom-style: none;
+    border-bottom-color: currentcolor;
+  border-bottom: 2px solid #ccc;
+  width: 100%;
+  background-color: whitesmoke;
+  border-radius: 15px;
+}
+
+.results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.resContainer {
+    width: 80%;
+    margin: 20px;
+    padding: 20px;
+    background-color: #ecf0f1;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.forecast, .activeAlerts {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.localForecast {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.localForecast th, .localForecast td {
+    border: 1px solid #bdc3c7;
+    padding: 10px;
+    text-align: left;
+}
+
+.activeAlerts ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* Responsive Styles */
+@media screen and (max-width: 600px) {
+    .resContainer {
+        width: 90%; /* Adjust as needed for smaller screens */
+    }
+
+    .localForecast th, .localForecast td {
+        font-size: 14px; /* Example: Reduce font size for smaller screens */
+    }
+}

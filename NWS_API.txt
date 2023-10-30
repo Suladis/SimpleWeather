@@ -1,0 +1,4 @@
+Uses JSON-Linked Data 
+
+https://api.weather.gov/openapi.json
+            
