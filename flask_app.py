@@ -14,21 +14,25 @@ def index():
 
 @app.route('/get_weather', methods=['POST'])
 def get_weather():
-    print("get_weather function called")
+    # print("get_weather function called")
     zip_code = request.form['zipCode']
-    print("Zip Code:", zip_code)
+    # print("Zip Code:", zip_code)
     
     # Call functions from weatherMain.py
     latitude, longitude, state = zipToGeo(zip_code)
-    print("Latitude:", latitude)
-    print("Longitude:", longitude)
-    print("State:", state)
+    # print("Latitude:", latitude)
+    # print("Longitude:", longitude)
+    # print("State:", state)
 
-    alerts = getAlerts(state)
-    print("Alerts:", alerts)
+    
 
-    forecast = getForecast(latitude, longitude)
-    print("Forecast:", forecast)
+    forecast,zoneid = getForecast(latitude, longitude)
+    # print("Forecast:", forecast)
+    
+    alerts = getAlerts(zoneid)
+
+    # print("Alerts Type:", type(alerts))
+    # print("Alerts Content:", alerts)
 
     # Ensure forecast is a dictionary
     if not isinstance(forecast, dict):

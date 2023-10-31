@@ -36,13 +36,21 @@
             </table>
         </div>
     </div>
-        <div class="resContainer">
-            <h4>Active Alerts:</h4>
+    <div class="resContainer">
+        {% if alerts and alerts|length > 0 %}
+        <h4>Active Alerts:</h4>
             <ul>
                 {% for alert in alerts %}
                     <li>{{ alert.event }} - {{ alert.headline }} - {{ alert.severity }}</li>
                 {% endfor %}
             </ul>
-        </div>
+        {% else %}
+            <div class="zeroAlerts">
+            <h4>No current active alerts.</h4>
+            </div>
+        {% endif %}
+    </div>
+    
+    
    
 {% endblock %}
