@@ -20,6 +20,10 @@ def getForecast(latitude, longitude):
         forecast_url = data['properties']['forecast']
         
         zone_id = data['properties']['forecastZone'].split('/')[-1]
+        
+        gridPoint, x, y = data['properties']['gridId'], data['properties']['gridX'],data['properties']['gridY']
+        # print(data)
+        print(gridPoint,x,y)
 
         # Fetch the forecast data
         forecast_response = requests.get(forecast_url)
@@ -34,8 +38,29 @@ def getForecast(latitude, longitude):
                     'temperature': period.get('temperature', '')
                 }
 
-    return temp_data,zone_id
+    return temp_data,zone_id,gridPoint,x,y
 
+# def getHourlyForecast(grid, x, y ):
+#     endpoint_url = f'https://api.weather.gov/gridpoints/{grid}/{x},{y}/forecast/hourly'
+#     response = requests.get(endpoint_url)
+    
+#     # print(response)
+#     temp_data = {}
+    
+#     if response.status_code == 200:
+#         data = response.json()
+#         print(data)
+        
+    
+            
+#         # print(forecast_data)
+#         for period in data.get('properties', {}).get('periods', []):
+#             temp_data[period.get('name', '')] = {
+#                 'forecast': period.get('shortForecast', ''),
+#                 'temperature': period.get('temperature', '')
+#         }
+#     return temp_data
+        
 
 def num_alerts():
     endpoint_url = 'https://api.weather.gov/alerts/active/count'

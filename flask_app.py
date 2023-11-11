@@ -26,8 +26,13 @@ def get_weather():
 
     
 
-    forecast,zoneid = getForecast(latitude, longitude)
+    forecast,zoneid,gridPoint,x,y = getForecast(latitude, longitude)
     # print("Forecast:", forecast)
+    
+    # forecastHourly = getHourlyForecast(gridPoint,x,y)
+    
+    
+    # print(forecastHourly)
     
     alerts = getAlerts(zoneid)
 
