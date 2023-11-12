@@ -1,8 +1,7 @@
 # app.py
-# print("Executing app.py")
+print("Executing app.py")
 from flask import Flask, render_template, request
-
-from weatherMain import num_alerts, getAlerts, zipToGeo, getForecast
+from weatherMain import num_alerts, getAlerts, zipToGeo, getForecast , getHourlyForecast
 
 app = Flask(__name__)
 
@@ -15,24 +14,33 @@ def index():
 @app.route('/get_weather', methods=['POST'])
 def get_weather():
     # print("get_weather function called")
-    zip_code = request.form['zipCode']
-    # print("Zip Code:", zip_code)
+    try:
+        zip_code = request.form['zipCode']
+        # print("Zip Code:", zip_code)
+        print(1)
+    except:
+        print(1)
+   
+    try:
+        # Call functions from weatherMain.py
+        latitude, longitude, state = zipToGeo(zip_code)
+        # print("Latitude:", latitude)
+        # print("Longitude:", longitude)
+        # print("State:", state)
+        print(2)
+    except:
+        print(2, 'failed')
     
-    # Call functions from weatherMain.py
-    latitude, longitude, state = zipToGeo(zip_code)
-    # print("Latitude:", latitude)
-    # print("Longitude:", longitude)
-    # print("State:", state)
-
-    
-
-    forecast,zoneid,gridPoint,x,y = getForecast(latitude, longitude)
-    # print("Forecast:", forecast)
+    try:
+        forecast,zoneid,gridPoint,x,y = getForecast(latitude, longitude)
+        # print("Forecast:", forecast)
+        print(3)
+    except:
+        print(4,"Fail")
     
     # forecastHourly = getHourlyForecast(gridPoint,x,y)
-    
-    
-    # print(forecastHourly)
+    hourlyForecast = getHourlyForecast(gridPoint,x,y)
+    # print(hourlyForecast)
     
     alerts = getAlerts(zoneid)
 
@@ -44,7 +52,7 @@ def get_weather():
         forecast = {}  # Set an empty dictionary if forecast is not a dictionary
 
     # Render the template with the data
-    return render_template('result.html', num_alerts=num_alerts(), alerts=alerts, forecast=forecast , zip_code=zip_code)
+    return render_template('result.html', num_alerts=num_alerts(), alerts=alerts, forecast=forecast , zip_code=zip_code, hourly=hourlyForecast)
 
 
 if __name__ == "__main__":

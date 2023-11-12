@@ -2,6 +2,8 @@
 
 import requests
 import pgeocode
+from datetime import datetime
+import itertools
 
 def getForecast(latitude, longitude):
     # Get grid forecast endpoint for the specified location
@@ -23,7 +25,7 @@ def getForecast(latitude, longitude):
         
         gridPoint, x, y = data['properties']['gridId'], data['properties']['gridX'],data['properties']['gridY']
         # print(data)
-        print(gridPoint,x,y)
+        # print(gridPoint,x,y)
 
         # Fetch the forecast data
         forecast_response = requests.get(forecast_url)
@@ -37,29 +39,42 @@ def getForecast(latitude, longitude):
                     'forecast': period.get('shortForecast', ''),
                     'temperature': period.get('temperature', '')
                 }
-
+    
     return temp_data,zone_id,gridPoint,x,y
 
-# def getHourlyForecast(grid, x, y ):
-#     endpoint_url = f'https://api.weather.gov/gridpoints/{grid}/{x},{y}/forecast/hourly'
-#     response = requests.get(endpoint_url)
+def getHourlyForecast(grid, x, y ):
+    endpoint_url = f'https://api.weather.gov/gridpoints/{grid}/{x},{y}/forecast/hourly'
+    response = requests.get(endpoint_url)
     
-#     # print(response)
-#     temp_data = {}
+    # print(response)
+    temp_data = {}
     
-#     if response.status_code == 200:
-#         data = response.json()
-#         print(data)
+    if response.status_code == 200:
+        data = response.json()
+        print(data)
         
     
+        for period in data.get('properties', {}).get('periods', []):
+            startTime = period.get('startTime', '')
             
-#         # print(forecast_data)
-#         for period in data.get('properties', {}).get('periods', []):
-#             temp_data[period.get('name', '')] = {
-#                 'forecast': period.get('shortForecast', ''),
-#                 'temperature': period.get('temperature', '')
-#         }
-#     return temp_data
+            try:
+                startTime = datetime.fromisoformat(startTime[:-6])
+
+                formattedTime = startTime.strftime("%I:%M %p")
+            except:
+                print('Cant get time')
+                formattedTime= None
+                
+            temp_data[period.get('number', '')] = {
+                'hour':formattedTime,
+                'forecast': period.get('shortForecast', ''),
+                'temperature': period.get('temperature', ''),
+                'probRain': period.get('probabilityOfPrecipitation', {}).get('value'),
+                'humidity':period.get('relativeHumidity', {}).get('value') # get values inside dictionaries\
+        }
+    temp_data=dict(itertools.islice(temp_data.items(),15)) # use itertools to slice the dictionary 
+    # print("-------------------",temp_data)
+    return temp_data
         
 
 def num_alerts():

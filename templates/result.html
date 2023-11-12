@@ -6,10 +6,50 @@
 {% endblock %}
 
 {% block results %}
-    <div class="resContainer" id="dayForecast" hidden> </div>
+    <div class="resContainer" id="dayForecast"> 
+        <div class="forecast" style="overflow:auto">
+            <h4>  Hourly Forecast: {{ zip_code }} </h4>
+            <table class="hourlyForecast">
+                <thead>
+                    <tr>
+                        
+                        {% for period, data in hourly.items() %}
+                            <th>{{ data.hour }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        
+                        {% for period, data in hourly.items() %}
+                            <td>{{ data.forecast }}</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        
+                        {% for period, data in hourly.items() %}
+                            <td>{{ data.temperature }} °F</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        
+                        {% for period, data in hourly.items() %}
+                            <td>{{ data.probRain }} %</td>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        
+                        {% for period, data in hourly.items() %}
+                            <td>{{ data.humidity }} %</td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <div class="resContainer" id="weekForcast">
         <h1 class="hehe"></h1>
-        <div class="forecast">
+        <div class="forecast" style="overflow:auto">
             <h4> 7-Day Forecast for ZipCode:{{ zip_code }} </h4>
             <table class="localForecast">
                 <thead>
